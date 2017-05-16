@@ -1,5 +1,6 @@
 from selenium import webdriver
 import time
+from core.config import WEBDRIVER_PATH, SEARCH_ROOT
 
 class WebDriver:
     pass
@@ -7,12 +8,14 @@ class WebDriver:
 
 class ScrapyDOU:
     def __init__(self):
-        self.browser = webdriver.Chrome(executable_path="/home/n1lux/Downloads/chromedriver")
+        self.browser = webdriver.Chrome(executable_path=WEBDRIVER_PATH)
 
     def get(self, url):
         self.browser.get(url=url)
 
     def search(self, term):
+        self.get(url=SEARCH_ROOT)
+
         input_search = self.browser.find_element_by_id("txt_pesquisa_avancada")
         input_search.send_keys('"{}"'.format(term))
 
@@ -28,14 +31,6 @@ class ScrapyDOU:
     def exit(self):
         self.browser.quit()
 
-
-if __name__ == "__main__":
-    url = "http://portal.imprensanacional.gov.br/pesquisa"
-    term = "universidade federal dos vales do jequitinhonha e mucuri"
-    dou = ScrapyDOU()
-    dou.get(url=url)
-    dou.search(term=term)
-    #dou.exit()
 
 
 
