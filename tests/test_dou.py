@@ -1,6 +1,7 @@
 from unittest import TestCase
 from core.webscrapy import DOU
 from core.douparser import DouParser
+import json
 
 
 class TestDou(TestCase):
@@ -28,10 +29,11 @@ class TestDou(TestCase):
         self.assertIn('itens encontrados', res)
 
     def test_search_start_end_year(self):
-        res = self.dou.search(term=self.term, start='01/01', end='12/12', year='2013')
+        res = self.dou.search(term=self.term, start='01/01', end='12/12', year='2017')
         self.assertIn('itens encontrados', res)
 
     def test_parser_dou(self):
-        res = self.dou.search(term=self.term)
+        res = self.dou.search(term=self.term, start='01/01', end='12/12', year='2017')
         dou = DouParser(source=res)
-        dou_parsed = dou.parser()
+        dou_parsed = json.loads(dou.parser())
+        self.assertIsInstance(dou_parsed, list)
