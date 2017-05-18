@@ -1,9 +1,13 @@
 from unittest import TestCase
+from core.webscrapy import ScrapeDOU
 
 
 class TestDou(TestCase):
     def setUp(self):
-        pass
+        self.dou = ScrapeDOU()
 
     def tearDown(self):
-        pass
+        self.dou.exit()
+
+    def test_search(self):
+        self.dou.search(term="universidade federal dos vales do jequitinhonha e mucuri")
