@@ -16,7 +16,9 @@ class DouParser:
     def parser(self):
         soup = self._soup()
         info = {}
+
         tb_info = soup.find(name='table', attrs={'id': 'ResultadoConsulta'})
+
         if tb_info:
             for tr in tb_info.find_all('tr'):
                 try:
