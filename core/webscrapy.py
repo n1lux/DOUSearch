@@ -20,8 +20,8 @@ class WebDriver:
 
 
 class ScrapeDOU:
-    def __init__(self, default_webdriver=DEFAULT_WEBDRIVER):
-        self.browser = WebDriver(default_driver=default_webdriver).get_driver()
+    def __init__(self, web_driver=DEFAULT_WEBDRIVER):
+        self.browser = WebDriver(default_driver=web_driver).get_driver()
 
     def _get(self, url):
         self.browser.get(url=url)
