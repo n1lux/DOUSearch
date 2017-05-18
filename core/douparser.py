@@ -18,7 +18,7 @@ class DouParser:
     def _has_data(elem):
         for c in elem.findChildren():
             try:
-                return 'data' == c.get('class')[0]
+                return 'data' in c.get('class')
             except TypeError:
                 return False
 
