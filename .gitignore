@@ -1,2 +1,4 @@
 *.idea
 *.dou
+*__pycache__
+*.pyc
