@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath("../"))
 
 from main.config import VERSION
@@ -8,28 +9,43 @@ from core.webscrapy import DOU
 from core.douparser import DouParser
 
 
-class Main:
-    def __init__(self, argv):
-        parser = argparse.ArgumentParser(argv)
-        parser.add_argument('--foo', dest='foo', help='foo help')
-        parser.add_argument('--version', action='version', version=VERSION)
-        args = parser.parse_args()
+class DouManager:
+    DEFAULT_ARGS = [{'name': '--term', 'dest': 'term', 'help': 'term to search'},
+                    {'name': '--start', 'dest': 'start', 'help': 'start date to search'},
+                    {'name': '--end', 'dest': 'end', 'help': 'end date to search'},
+                    {'name': '--year', 'dest': 'year', 'help': 'year to search'}]
+    
+    def __init__(self):
+        pass
 
-        if args.foo:
-            self.foo(args.foo)
+    @classmethod
+    def from_args(cls, args):
+        if not isinstance(args, argparse.Namespace):
+            raise Exception("Incorrect arguments from main")
+
+        cls.run(args)
 
     @staticmethod
-    def foo(arg):
+    def run(args):
         dou = DOU()
-        term = "universidade federal dos vales do jequitinhonha e mucuri"
-        res = dou.search(term=term, start='01/01', end='12/12', year='2017')
+        res = dou.search(term=args.term, start=args.start, end=args.end, year=args.year)
         print(DouParser(source=res).parser())
 
 
-def main(argv):
-    Main(argv)
+class Main:
+    def __init__(self):
+        pass
+
+    @classmethod
+    def parse_args(cls, argv):
+        parser = argparse.ArgumentParser(argv)
+
+        for arg in DouManager.DEFAULT_ARGS:
+            parser.add_argument(arg['name'], dest=arg['dest'], help=arg['help'])
+
+        parser.add_argument('--version', action='version', version=VERSION)
+        return parser.parse_args()
 
 
 if __name__ == "__main__":
-
-    main(sys.argv[1:])
+    DouManager.from_args(args=Main().parse_args(sys.argv[1:]))
