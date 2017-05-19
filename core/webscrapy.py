@@ -1,8 +1,8 @@
-from selenium import webdriver
 import time
 
+from selenium import webdriver
 
-from core.config import WEBDRIVER_PATH, SEARCH_ROOT, DEFAULT_WEBDRIVER
+from dousearch.config import WEBDRIVER_PATH, SEARCH_ROOT, DEFAULT_WEBDRIVER
 
 
 class WebDriver:
