@@ -71,6 +71,11 @@ class DOU:
         if len(self.browser.window_handles) > 1:
             self.browser.switch_to.window(self.browser.window_handles[1])
 
+        pagination = self.browser.find_element_by_id('paginacao')
+        if pagination:
+            # TODO anything with pagination
+            print('has pagination')
+
         return self.browser.page_source
 
     def exit(self):
