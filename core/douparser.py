@@ -1,14 +1,11 @@
-from bs4 import BeautifulSoup as bs
 import re
 import json
+from core.utils import source_soup
 
 
 class DouParser:
     def __init__(self, source):
         self.source = source
-
-    def _soup(self):
-        return bs(self.source, 'html.parser')
 
     @staticmethod
     def _clean_text(text):
@@ -45,7 +42,7 @@ class DouParser:
         return info
 
     def parser(self):
-        soup = self._soup()
+        soup = source_soup(self.source)
         data = []
 
         tb_info = soup.find(name='table', attrs={'id': 'ResultadoConsulta'})
