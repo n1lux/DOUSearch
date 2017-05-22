@@ -28,8 +28,9 @@ class DouManager:
     @staticmethod
     def run(args):
         dou = DOU()
-        res = dou.search(term=args.term, start=args.start, end=args.end, year=args.year)
-        print(DouParser(source=res).parser())
+        page_source = dou.search(term=args.term, start=args.start, end=args.end, year=args.year)
+        parsed_items = DouParser(source=page_source).parser()
+        print()
 
 
 class Main:
