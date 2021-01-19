@@ -4,8 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-beautifulsoup4 = "==4.6.0"
-selenium = "==3.4.1"
+selenium = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 
