@@ -1,7 +1,7 @@
 # DOUSearch
 
 
-### a webscraper for diario oficial da união
+### a webscraper for diario oficial da união searching by term and date
 
 
 #### Usage
