@@ -31,7 +31,7 @@ class DOU:
     def search(self, term, start=None, end=None, year=None):
         self._get(url=SEARCH_ROOT)
 
-        input_search_term = self.browser.find_element_by_id("txt_pesquisa_avancada")
+        input_search_term = self.browser.find_element_by_id("txtPesquisa_avancada")
         input_search_term.send_keys('"{}"'.format(term))
 
         chk_box_all = self.browser.find_element_by_xpath("//input[@name='edicao.jornal']")
@@ -40,31 +40,31 @@ class DOU:
 
         if start:
             digits = start.replace('/', '')
-            input_start = self.browser.find_element_by_id("dt_inicio_pesquisa_avancada")
+            input_start = self.browser.find_element_by_id("dt_inicio_avancada")
             input_start.click()
             input_start.clear()
             for d in digits:
-                input_start = self.browser.find_element_by_id("dt_inicio_pesquisa_avancada")
+                input_start = self.browser.find_element_by_id("dt_inicio_avancada")
                 input_start.send_keys(d)
 
         if end:
             digits = end.replace('/', '')
-            input_end = self.browser.find_element_by_id("dt_fim_pesquisa_avancada")
+            input_end = self.browser.find_element_by_id("dt_fim_avancada")
             input_end.click()
             input_end.clear()
             for d in digits:
-                input_end = self.browser.find_element_by_id("dt_fim_pesquisa_avancada")
+                input_end = self.browser.find_element_by_id("dt_fim_avancada")
                 input_end.send_keys(d)
 
         if year:
-            select_year = self.browser.find_element_by_id("ano_pesquisa_avancada")
+            select_year = self.browser.find_element_by_id("ano_avancada")
             options = [o for o in select_year.find_elements_by_tag_name("option")]
             for el in options:
                 if el.text == str(year):
                     el.click()
                     break
 
-        btn_search = self.browser.find_element_by_xpath("//input[@value='BUSCAR']")
+        btn_search = self.browser.find_element_by_xpath("//input[@value='consulta']")
         btn_search.click()
         time.sleep(5)
 
